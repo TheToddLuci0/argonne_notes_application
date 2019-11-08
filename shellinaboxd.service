@@ -1,0 +1,11 @@
+[Unit]
+Description=shellinaboxd
+After=network.target
+
+[Service]
+ExecStart=/usr/sbin/shellinaboxd -t -p 8080 -s /:blueteam:blueteam:/home/blueteam:/usr/local/bin/notes_tracker
+Type=simple
+PIDFile=/var/run/shellinaboxd.pid
+
+[Install]
+WantedBy=default.target
