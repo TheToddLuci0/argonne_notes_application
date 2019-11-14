@@ -68,10 +68,12 @@ void add_edit_note() {
   int already_in_list = 0;
 
   printf("Input note name: ");
-  gets(inp);
+  //gets(inp);
+  fgets(inp,100,stdin);
   strtok(inp, "\n");
   printf("Input note description: ");
-  gets(inp2);
+  //gets(inp2);
+  fgets(inp2,100,stdin);
   strtok(inp2, "\n");
   
   description = (char*)malloc(strlen(inp2));
@@ -116,7 +118,8 @@ void delete_note() {
   note_t* curr = notes_list;
   int found_in_list = 0;
   printf("Input note you would like to remove: ");
-  gets(inp);
+  //gets(inp);
+  fgets(inp,64,stdin);
   strtok(inp, "\n");
   while(curr != NULL) {
     if(strcmp(curr->name, inp) == 0) {
@@ -175,7 +178,8 @@ int backup_db() {
     char inp[100] = {0};
 
     printf("What database do you want to dump? ");
-    gets(inp);
+    //gets(inp);
+    fgets(inp,100,stdin);
     sprintf(command, "mysqldump -h %1$s -u notesuser -ppassword %2$s > %2$s.sql", database_ip, inp);
     sprintf(command2, "zip %1$s.zip %1$s.sql", inp);
     sprintf(command3, "curl -F \"file=@%s.zip\" http://%s:3000/uploads", inp, flask_ip);
@@ -201,7 +205,8 @@ int restore_db() {
     char inp[100] = {0};
 
     printf("What database do you want to restore? ");
-    gets(inp);
+    //gets(inp);
+    fgets(inp,100,stdin);
     sprintf(command, "curl http://%1$s:8000/%2$s.sql --output %2$s.sql", flask_ip, inp);
     sprintf(command2, "mysql -h %1$s -u notesuser -ppassword %2$s < %2$s.sql", database_ip, inp);
     sprintf(command3, "rm %1$s.sql", inp);
