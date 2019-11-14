@@ -159,6 +159,7 @@ int commit_db(MYSQL* con) {
   char query_str[1024] = {0};
   while(curr != NULL) {
 
+    //TODO: sqli here
     sprintf(query_str, "INSERT INTO Notes VALUES('%s', '%s')", curr->name, curr->description);
     if(mysql_query(con, query_str)) {
       printf("Error executing query: %s.\n", query_str);
